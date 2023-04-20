@@ -1,103 +1,184 @@
-let contadorItems = 0;
+let selectedItems = 0;
+let dish;
+let drink;
+let dessert;
+let dishPrice;
+let drinkPrice;
+let dessertPrice;
+let totalPrice = 0;
 
-let prato;
-let bebida;
-let sobremesa;
-
-let precoPrato;
-let precoBebida;
-let precoSobremesa;
-let precoTotal = 0;
-
-function selecionarPrato(elemento, nomePrato, preco) {
-
+const dishes = [
+    {
+        name: "Frango americano",
+        image: "frango-americano.jpg",
+        description: "Frango frito americano igual do Baldelícia",
+        price: 27.90
+    },
+    {
+        name: "Frango oriental",
+        image: "frango-oriental.jpeg",
+        description: "Tradicional Frango Xadrez com muito amendoim",
+        price: 29.90
+    },
+    {
+        name: "Frango a passarinho",
+        image: "frango-passarinho.jpg",
+        description: "O típico frango a passarinho que a sua avó faz",
+        price: 25.90
+    }
+];
+const drinks = [
+    {
+        name: "Água de coco",
+        image: "agua-coco.jpeg",
+        description: "Entregamos direto no coco",
+        price: 5.90
+    },
+    {
+        name: "Suco detox",
+        image: "suco-detox.jpg",
+        description: "Copo 350ml (com couve, limão e gengibre)",
+        price: 7.90
+    },
+    {
+        name: "Suco de Laranja",
+        image: "suco-laranja.jpeg",
+        description: "Copo 350ml (feito com laranjas pêra rio)",
+        price: 4.90
+    }
+];
+const desserts = [
+    {
+        name: "Doce de Leite",
+        image: "doce-leite.jpg",
+        description: "Doce de leite macio e gostoso",
+        price: 12.90
+    },
+    {
+        name: "Pé de moleque",
+        image: "pe-moleque.jpg",
+        description: "O delicioso doce de amendoim com rapadura",
+        price: 10.90
+    },
+    {
+        name: "Romeu e Julieta",
+        image: "romeu-julieta.jpg",
+        description: "Uma das combinações mais gostosas que você pode encontrar",
+        price: 11.90
+    }
+];
+const availableDishes = document.querySelector(".opcoes.prato");
+dishes.map((dish)=>{
+    availableDishes.innerHTML += `
+        <div class="opcao" onclick="selectDish(this, \'${dish.name}\', ${dish.price})">\
+            <img src="images/${dish.image}" />\
+            <div class="titulo">${dish.name}</div>\
+            <div class="descricao">${dish.description}</div>\
+            <div class="fundo">\
+                <div class="preco">R$ ${dish.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>\
+                <div class="check">\
+                    <ion-icon name="checkmark-circle"></ion-icon>\
+                </div>\
+            </div>\
+        </div>
+  `;
+});
+const availableDrinks = document.querySelector(".opcoes.bebida");
+drinks.map((drink)=>{
+    availableDrinks.innerHTML += `
+        <div class="opcao" onclick="selectDrink(this, \'${drink.name}\', ${drink.price})">\
+            <img src="images/${drink.image}" />\
+            <div class="titulo">${drink.name}</div>\
+            <div class="descricao">${drink.description}</div>\
+            <div class="fundo">\
+                <div class="preco">R$ ${drink.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>\
+                <div class="check">\
+                    <ion-icon name="checkmark-circle"></ion-icon>\
+                </div>\
+            </div>\
+        </div>
+  `;
+});
+const availableDesserts = document.querySelector(".opcoes.sobremesa");
+desserts.map((dessert)=>{
+    availableDesserts.innerHTML += `
+        <div class="opcao" onclick="selectDessert(this, \'${dessert.name}\', ${dessert.price})">\
+            <img src="images/${dessert.image}" />\
+            <div class="titulo">${dessert.name}</div>\
+            <div class="descricao">${dessert.description}</div>\
+            <div class="fundo">\
+                <div class="preco">R$ ${dessert.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>\
+                <div class="check">\
+                    <ion-icon name="checkmark-circle"></ion-icon>\
+                </div>\
+            </div>\
+        </div>
+  `;
+});
+function selectDish (element, name, price) {
     const selecionado = document.querySelector(".prato .selecionado");
-
     if (selecionado !== null) {
         selecionado.classList.remove("selecionado");
     } else {
-        contadorItems = contadorItems + 1;
+        selectedItems++;
     }
-
-    precoPrato = preco;
-    prato = nomePrato;
-    elemento.classList.add("selecionado");
-    verificarPedido();
+    dishPrice = price;
+    dish = name;
+    element.classList.add("selecionado");
+    checkOrder();
 }
-
-function selecionarBebida(elemento, nomeBebida, preco) {
-
+function selectDrink (element, name, price) {
     const selecionado = document.querySelector(".bebida .selecionado");
-
     if (selecionado !== null) {
         selecionado.classList.remove("selecionado");
     } else {
-        contadorItems = contadorItems + 1;
-
+        selectedItems++;
     }
-    precoBebida = preco;
-    bebida = nomeBebida;
-    elemento.classList.add("selecionado");
-    verificarPedido();
+    drinkPrice = price;
+    drink = name;
+    element.classList.add("selecionado");
+    checkOrder();
 }
-
-function selecionarSobremesa(elemento, nomeSobremesa, preco) {
-
+function selectDessert (element, name, price) {
     const selecionado = document.querySelector(".sobremesa .selecionado");
-
     if (selecionado !== null) {
         selecionado.classList.remove("selecionado");
     } else {
-        contadorItems = contadorItems + 1;
-
+        selectedItems++;
     }
-    precoSobremesa = preco;
-    sobremesa = nomeSobremesa;
-
-    elemento.classList.add("selecionado");
-    verificarPedido();
+    dessertPrice = price;
+    dessert = name;
+    element.classList.add("selecionado");
+    checkOrder();
 }
-
-function confirmarPedido() {
-
-    const modal = document.querySelector(".overlay");
-    modal.classList.remove("escondido");
-
-
-    precoTotal = precoPrato + precoBebida + precoSobremesa;
-
-    document.querySelector(".confirmar-pedido .prato .nome").innerHTML = prato;
-
-    document.querySelector(".confirmar-pedido .prato .preco").innerHTML = precoPrato.toFixed(2);
-
-    document.querySelector(".confirmar-pedido .bebida .nome").innerHTML = bebida;
-
-    document.querySelector(".confirmar-pedido .bebida .preco").innerHTML = precoBebida.toFixed(2);
-
-    document.querySelector(".confirmar-pedido .sobremesa .nome").innerHTML = sobremesa;
-
-    document.querySelector(".confirmar-pedido .sobremesa .preco").innerHTML = precoSobremesa.toFixed(2);
-
-    document.querySelector(".confirmar-pedido .total .preco").innerHTML = precoTotal.toFixed(2);
-
+function confirmOrder() {
+    if (selectedItems === 3) {
+        const modal = document.querySelector(".overlay");
+        modal.classList.remove("escondido");
+        totalPrice = dishPrice + drinkPrice + dessertPrice;
+        document.querySelector(".confirmar-pedido .prato .nome").innerHTML = dish;
+        document.querySelector(".confirmar-pedido .prato .preco").innerHTML = `R$ ${dishPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+        document.querySelector(".confirmar-pedido .bebida .nome").innerHTML = drink;
+        document.querySelector(".confirmar-pedido .bebida .preco").innerHTML = `R$ ${drinkPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+        document.querySelector(".confirmar-pedido .sobremesa .nome").innerHTML = dessert;
+        document.querySelector(".confirmar-pedido .sobremesa .preco").innerHTML = `R$ ${dessertPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+        document.querySelector(".confirmar-pedido .total .preco").innerHTML = `R$ ${totalPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    }
 }
-
-
 function cancelarPedido() {
     const modal = document.querySelector(".overlay");
     modal.classList.add("escondido");
 }
-
-function enviarZap() {
-    const telefoneRestaurante = 5531999669966;
-    const encodedText = encodeURIComponent(`Olá, gostaria de fazer o pedido: \n- Prato: ${prato} \n- Bebida: ${bebida} \n- Sobremesa: ${sobremesa} \nTotal: R$ ${precoTotal.toFixed(2)}`);
-
-    const urlWhatsapp = `https://wa.me/${telefoneRestaurante}?text=${encodedText}`;
+function sendMessage() {
+    const name = prompt("Qual é o seu nome?")
+    const address = prompt("Qual é o seu enderço?")
+    const restaurantPhone = 5531986282005;
+    const encodedText = encodeURIComponent(`Olá, gostaria de fazer o pedido:\n- Prato: ${dish}\n- Bebida: ${drink}\n- Sobremesa: ${dessert}\nTotal: R$ ${totalPrice.toFixed(2)}\nNome: ${name}\nEndereço: ${address}`);
+    const urlWhatsapp = `https://wa.me/${restaurantPhone}?text=${encodedText}`;
     window.open(urlWhatsapp);
 }
-
-function verificarPedido() {
-    if (contadorItems === 3) {
+function checkOrder() {
+    if (selectedItems === 3) {
         const botao = document.querySelector(".fazer-pedido");
         botao.classList.add("ativo");
         botao.innerHTML = "Fazer pedido";

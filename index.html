@@ -1,179 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="estilos.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DrivenEats</title>
+  <link rel="icon" type="image/png"  href="/images/favicon.png">
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="overlay escondido">
-        <div class="confirmar-pedido">
-          <div class="titulo">Confirme seu pedido</div>
-          <ul>
-            <li class="prato">
-              <div class="nome"></div>
-              <div class="preco"></div>
-            </li>
-            <li class="bebida">
-              <div class="nome"></div>
-              <div class="preco"></div>
-            </li>
-            <li class="sobremesa">
-              <div class="nome"></div>
-              <div class="preco"></div>
-            </li>
-            <li class="total">
-              <div>Total</div>
-              <div class="preco">R$ 27,70</div>
-            </li>
-          </ul>
-          <button class="confirmar" onclick="enviarZap()">Tudo certo, pode pedir!</button>
-          <button class="cancelar" onclick="cancelarPedido()">Cancelar</button>
-        </div>
+  <div class="overlay escondido">
+    <div class="confirmar-pedido">
+      <div class="titulo">Confirme seu pedido</div>
+      <ul>
+        <li class="prato">
+          <div class="nome"></div>
+          <div class="preco"></div>
+        </li>
+        <li class="bebida">
+          <div class="nome"></div>
+          <div class="preco"></div>
+        </li>
+        <li class="sobremesa">
+          <div class="nome"></div>
+          <div class="preco"></div>
+        </li>
+        <li class="total">
+          <div>Total</div>
+          <div class="preco"></div>
+        </li>
+      </ul>
+      <button class="confirmar" onclick="sendMessage()">Tudo certo, pode pedir!</button>
+      <button class="cancelar" onclick="cancelarPedido()">Cancelar</button>
+    </div>
+  </div>
+  <div class="header">
+    <div class="titulo">Driven Eats</div>
+    <div class="subtitulo">Sua comida em 6 minutos</div>
+  </div>
+  <div class="menu">
+    <div class="secao">
+      <div class="titulo">Primeiro, seu prato</div>
+      <div class="opcoes prato">
       </div>
-  
-      <div class="header">
-        <div class="titulo">Driven Eats</div>
-        <div class="subtitulo">Sua comida em 6 minutos</div>
+    </div>
+    <div class="secao">
+      <div class="titulo">Agora, sua bebida</div>
+      <div class="opcoes bebida">
       </div>
-  
-      <div class="menu">
-        <div class="secao">
-          <div class="titulo">Primeiro, seu prato</div>
-          <div class="opcoes prato">
-            <div class="opcao" onclick="selecionarPrato(this, 'Frango americano', 25.00)">
-              <img src="imagens/frango-americano.jpg" />
-              <div class="titulo">Frango americano</div>
-              <div class="descricao">Frango frito americano igual do Baldelícia</div>
-              <div class="fundo">
-                <div class="preco">R$ 27,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarPrato(this, 'Frango oriental', 14.90)">
-              <img src="imagens/frango-oriental.jpeg" />
-              <div class="titulo">Frango oriental</div>
-              <div class="descricao">Tradicional Frango Xadrez com muito amendoim</div>
-              <div class="fundo">
-                <div class="preco">R$ 29,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarPrato(this, 'Frango a passarinho', 14.90)">
-              <img src="imagens/frango-passarinho.jpg" />
-              <div class="titulo">Frango a passarinho</div>
-              <div class="descricao">O típico frango a passarinho que a sua avó faz</div>
-              <div class="fundo">
-                <div class="preco">R$ 25,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="secao">
-          <div class="titulo">Agora, sua bebida</div>
-          <div class="opcoes bebida">
-            <div class="opcao" onclick="selecionarBebida(this, 'Água de coco', 4.90)">
-              <img src="imagens/agua-coco.jpeg" />
-              <div class="titulo">Água de coco</div>
-              <div class="descricao">Entregamos direto no coco</div>
-              <div class="fundo">
-                <div class="preco">R$ 5,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarBebida(this, 'Suco detox', 4.90)">
-              <img src="imagens/suco-detox.jpg" />
-              <div class="titulo">Suco detox</div>
-              <div class="descricao">Copo 350ml (com couve, limão e gengibre)</div>
-              <div class="fundo">
-                <div class="preco">R$ 7,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarBebida(this, 'Suco de Laranja', 4.90)">
-              <img src="imagens/suco-laranja.jpeg" />
-              <div class="titulo">Suco de Laranja</div>
-              <div class="descricao">Copo 350ml (feito com laranjas pêra rio)</div>
-              <div class="fundo">
-                <div class="preco">R$ 4,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="secao">
-          <div class="titulo">Por fim, sua sobremesa</div>
-          <div class="opcoes sobremesa">
-            <div class="opcao" onclick="selecionarSobremesa(this, 'Doce de leite', 7.90)">
-              <img src="imagens/doce-leite.jpg" />
-              <div class="titulo">Doce de Leite</div>
-              <div class="descricao">Doce de leite macio e gostoso</div>
-              <div class="fundo">
-                <div class="preco">R$ 12,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarSobremesa(this, 'Pé de moleque', 7.90)">
-              <img src="imagens/pe-moleque.jpg" />
-              <div class="titulo">Pé de moleque</div>
-              <div class="descricao">O delicioso doce de amendoim com rapadura</div>
-              <div class="fundo">
-                <div class="preco">R$ 10,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-  
-            <div class="opcao" onclick="selecionarSobremesa(this, 'Romeu e Julieta', 7.90)">
-              <img src="imagens/romeu-julieta.jpg" />
-              <div class="titulo">Romeu e Julieta</div>
-              <div class="descricao">Uma das combinações mais gostosas que você pode encontrar</div>
-              <div class="fundo">
-                <div class="preco">R$ 11,90</div>
-                <div class="check">
-                  <ion-icon name="checkmark-circle"></ion-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+    <div class="secao">
+      <div class="titulo">Por fim, sua sobremesa</div>
+      <div class="opcoes sobremesa">
       </div>
-  
-      <div class="footer">
-        <a class="fazer-pedido" onclick="confirmarPedido()">
-          Selecione os 3 itens<br>para fechar o pedido
-        </a>
-      </div>
-  
-      <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-      <script src="scripts.js"></script>
+    </div>
+  </div>
+  <div class="footer">
+    <a class="fazer-pedido" onclick="confirmOrder()">
+      Selecione os 3 itens<br>para fechar o pedido
+    </a>
+  </div>
+  <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
